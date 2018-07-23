@@ -1,0 +1,76 @@
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?language javascript?>
+
+<VBox fx:controller="controllers.MainController" xmlns:fx="http://javafx.com/fxml">
+
+    <fx:script>
+        function handleSubmitButtonAction() {
+        actiontarget.setText("Calling the JavaScript");
+        }
+         </fx:script>
+
+    <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
+        <menus>
+            <Menu text="Firmy">
+                <items>
+                    <MenuItem text="Dodaj" onAction="#addCompany"/>
+                    <MenuItem text="Usuń" onAction="#deleteCompany"/>
+                    <MenuItem text="Przeglądaj" onAction="#viewCompanyList"/>
+                </items>
+            </Menu>
+            <Menu text="Plik">
+                <items>
+                    <MenuItem text="Wczytaj"/>
+                </items>
+            </Menu>
+            <Menu text="Płatności">
+                <items>
+                    <MenuItem text="Przeglądaj" onAction="#handleKeyInput"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+
+    <fx:include fx:id="welcomeText" source="welcome.fxml" alignment="center"/>
+    <fx:include fx:id="addCompanyView" source="addCompanyView.fxml" alignment="center" visible="false" maxHeight="0" minHeight="0"/>
+    <fx:include fx:id="companyListView" source="viewCompanyList.fxml" alignment="center" visible="false" maxHeight="0" minHeight="0"/>
+
+
+    <GridPane fx:id="testGrid" alignment="center">
+        <padding>
+            <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+
+
+        <Label text="User Name:"
+               GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+        <TextField
+                GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Password:"
+               GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+        <PasswordField fx:id="passwordField"
+                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <HBox spacing="10" alignment="bottom_right"
+              GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button text="Sign In"
+                    onAction="handleSubmitButtonAction(event);"/>
+
+        </HBox>
+
+        <Text fx:id="actiontarget"
+              GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    </GridPane>
+
+    <stylesheets>
+        <URL value="@Test.css"/>
+    </stylesheets>
+</VBox>
+

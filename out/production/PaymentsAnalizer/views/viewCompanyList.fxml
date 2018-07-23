@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<?import model.Company?>
+<VBox fx:id="companyListView" fx:controller="controllers.ViewCompanyListController" xmlns:fx="http://javafx.com/fxml">
+    <padding>
+        <Insets top="10" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <GridPane alignment="center" vgap="10">
+        <Text id="welcome-text" text="Przeglądasz firmy!"
+              GridPane.columnIndex="0" GridPane.rowIndex="0"
+              GridPane.columnSpan="2"/>
+        <Separator
+                GridPane.columnIndex="0" GridPane.rowIndex="1"
+                GridPane.columnSpan="2"/>
+    </GridPane>
+    <GridPane alignment="center" vgap="10">
+        <padding>
+            <Insets top="100" right="25" bottom="10" left="25"/>
+        </padding>
+        <TableView fx:id="companiesTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="id" text="Lp." prefWidth="50.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="name" text="Nazwa firmy" prefWidth="150.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="name"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="amount" text="Czynsz" prefWidth="100.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="amount"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="description" text="Opis" prefWidth="300.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="description"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </GridPane>
+    <stylesheets>
+        <URL value="@Test.css"/>
+    </stylesheets>
+</VBox>
