@@ -9,7 +9,7 @@
 
 <VBox fx:id="addCompanyView" fx:controller="controllers.AddCompanyController" xmlns:fx="http://javafx.com/fxml">
     <padding>
-        <Insets top="350" right="25" bottom="10" left="25"/>
+        <Insets top="400" right="25" bottom="10" left="25"/>
     </padding>
 
     <GridPane alignment="center" vgap="10">

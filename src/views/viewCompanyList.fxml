@@ -26,7 +26,8 @@
         <padding>
             <Insets top="100" right="25" bottom="10" left="25"/>
         </padding>
-        <TableView fx:id="companiesTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="600.0">
+        <TableView fx:id="companiesTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="600.0"
+                   onMouseClicked="#checkSelectedRow">
             <columns>
                 <TableColumn fx:id="id" text="Lp." prefWidth="50.0">
                     <cellValueFactory>
@@ -50,7 +51,25 @@
                 </TableColumn>
             </columns>
         </TableView>
+
     </GridPane>
+    <GridPane fx:id="viewMenuId" alignment="center">
+
+        <HBox spacing="10" alignment="bottom_right"
+              GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button fx:id="modifyCompanyButton" text="Modyfikuj" disable="true"
+                    onAction="#modifyCompany"/>
+
+            <Button fx:id="deleteCompanyButton" text="Usuń" disable="true"
+                    onAction="#deleteCompanyButton"/>
+
+        </HBox>
+
+        <Text fx:id="actiontarget"
+              GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+    </GridPane>
+
+    <fx:include fx:id="modifyCompanyView" source="modifyCompanyView.fxml" alignment="center" visible="false" maxHeight="0" minHeight="0"/>
     <stylesheets>
         <URL value="@Test.css"/>
     </stylesheets>

@@ -42,7 +42,7 @@ public class CompanyTableData {
         this.id.set(id);
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount.get();
     }
 
