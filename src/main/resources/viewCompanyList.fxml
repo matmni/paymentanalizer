@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<VBox fx:id="companyListView" fx:controller="controllers.ViewCompanyListController" xmlns:fx="http://javafx.com/fxml">
+    <padding>
+        <Insets top="10" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <GridPane alignment="center" vgap="10">
+        <Text id="welcome-text" text="Przeglądasz firmy"
+              GridPane.columnIndex="0" GridPane.rowIndex="0"
+              GridPane.columnSpan="2"/>
+        <Separator
+                GridPane.columnIndex="0" GridPane.rowIndex="1"
+                GridPane.columnSpan="2"/>
+    </GridPane>
+    <GridPane alignment="center" vgap="10">
+        <padding>
+            <Insets top="100" right="25" bottom="10" left="25"/>
+        </padding>
+        <TableView fx:id="companiesTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0"
+                   onMouseClicked="#checkSelectedRow">
+            <columns>
+                <TableColumn fx:id="id" text="Lp." prefWidth="50.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="name" text="Nazwa firmy" prefWidth="150.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="name"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="amount" text="Czynsz" prefWidth="100.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="amount"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="description" text="Opis" prefWidth="300.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="description"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="keyWords" text="Słowa kluczowe" prefWidth="300.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="keyWords"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+    </GridPane>
+    <GridPane fx:id="viewMenuId" alignment="center">
+
+        <HBox spacing="10" alignment="bottom_right"
+              GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button fx:id="deleteCompanyButton" text="Usuń" disable="true"
+                    onAction="#deleteCompanyButton"/>
+
+        </HBox>
+
+        <Text fx:id="actiontarget"
+              GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+    </GridPane>
+
+    <stylesheets>
+        <URL value="@Test.css"/>
+    </stylesheets>
+</VBox>
