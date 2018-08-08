@@ -80,7 +80,7 @@ public class MainController extends Application {
     public void viewPaymentsList(ActionEvent actionEvent) {
         hoverAll();
         paymentsView.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.50));
-        paymentsView.setMinHeight(750);
+        paymentsView.setMinHeight(800);
         paymentsView.setVisible(true);
     }
 

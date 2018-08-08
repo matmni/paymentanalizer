@@ -83,7 +83,7 @@ public class PaymentsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         paymentsTable.setPlaceholder(new Label("Tabela dla wyliczonych należności"));
-        notMappedPaymentsTable.setPlaceholder(new Label("Tabela dla niezmapowanych wpłat"));
+        notMappedPaymentsTable.setPlaceholder(new Label("Tabela dla nie zmapowanych wpłat"));
         companyName.setCellFactory(column -> {
             return new TableCell<CompanyPaymentResult, String>() {
                 @Override

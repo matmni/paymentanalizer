@@ -8,7 +8,7 @@
 <?import java.net.URL?>
 <VBox fx:id="fileImportedView" fx:controller="controllers.FileImportedController" xmlns:fx="http://javafx.com/fxml">
     <padding>
-        <Insets top="10" right="25" bottom="10" left="25"/>
+        <Insets top="100" right="25" bottom="10" left="25"/>
     </padding>
 
     <GridPane alignment="center" vgap="10">
@@ -23,7 +23,7 @@
     <padding>
         <Insets top="100" right="25" bottom="10" left="25"/>
     </padding>
-    <TableView fx:id="importedFileTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0">
+    <TableView fx:id="importedFileTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0" prefHeight="500" minHeight="500">
         <columns>
             <TableColumn fx:id="id" text="Lp." prefWidth="100.0">
                 <cellValueFactory>

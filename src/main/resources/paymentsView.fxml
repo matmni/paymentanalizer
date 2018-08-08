@@ -9,7 +9,7 @@
 <?import java.net.URL?>
 <VBox fx:id="fileImportedView" fx:controller="controllers.PaymentsController" xmlns:fx="http://javafx.com/fxml">
     <padding>
-        <Insets top="60" right="25" bottom="10" left="25"/>
+        <Insets top="20" right="25" bottom="10" left="25"/>
     </padding>
 
     <GridPane alignment="center" >
@@ -39,7 +39,7 @@
         <padding>
             <Insets top="20" right="25" bottom="10" left="25"/>
         </padding>
-        <TableView fx:id="paymentsTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0" prefHeight="400">
+        <TableView fx:id="paymentsTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0" prefHeight="400" minHeight="400">
             <columns>
                 <TableColumn fx:id="companyName" text="Nazwa firmy" prefWidth="340.0">
                     <cellValueFactory>
@@ -69,7 +69,7 @@
         <padding>
             <Insets top="20" right="25" bottom="10" left="25"/>
         </padding>
-        <TableView fx:id="notMappedPaymentsTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0" prefHeight="400">
+        <TableView fx:id="notMappedPaymentsTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0"  prefHeight="200" minHeight="200">
             <columns>
                 <TableColumn fx:id="desc" text="Opis" prefWidth="460.0">
                     <cellValueFactory>
