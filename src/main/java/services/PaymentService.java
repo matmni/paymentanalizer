@@ -4,6 +4,7 @@ import Exceptions.FileImportedException;
 import Exceptions.ImportFileErrorsContainer;
 import Exceptions.ParseError;
 import model.*;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repositories.ImportedFileDao;
@@ -77,20 +78,11 @@ public class PaymentService {
     }
 
     private void preparePaymentResult(List<CompanyPaymentResult> paymentResults, Company company, Payment payment) {
-        boolean paymentResultUpdated = false;
         for (CompanyPaymentResult paymentResult : paymentResults) {
             if (paymentResult.getKeyWords().equals(company.getKeyWords())) {
-                paymentResultUpdated = updatePaymentResult(payment, paymentResult);
+                paymentResult.setRest(paymentResult.getRest().subtract(payment.getAmount()));
             }
         }
-    }
-
-
-    private boolean updatePaymentResult(Payment payment, CompanyPaymentResult paymentResult) {
-        boolean paymentResultUpdated;
-        paymentResult.setRest(paymentResult.getRest().subtract(payment.getAmount()));
-        paymentResultUpdated = true;
-        return paymentResultUpdated;
     }
 
     private boolean checkIfPaymentContainsKewWords(String[] keyWords, Payment payment) {
@@ -119,8 +111,26 @@ public class PaymentService {
 
         ImportFileErrorsContainer errorsContener = readFile(reader, payments);
 
-        if (!errorsContener.hasErrors()) {
-            paymentDao.save(payments);
+        if (!errorsContener.hasParseErrors()) {
+            try {
+                paymentDao.save(payments);
+            } catch (Exception e) {
+                if (e.getCause() instanceof ConstraintViolationException) {
+                    System.out.println("Błąd unikalności podczas parsowania pliku, przechądzę w tryb pojedynczy.");
+                    for (Payment payment : payments) {
+                        try {
+                            paymentDao.save(payment);
+                        } catch (Exception ex) {
+                            if (ex.getCause() instanceof ConstraintViolationException) {
+                                errorsContener.getConstraintErrors().add(payment);
+                            }
+                        }
+                    }
+                } else {
+                    throw e;
+                }
+            }
+
             importedFileDao.save(new ImportedFile(file.getName(), new Date()));
         }
         return errorsContener;
@@ -133,7 +143,7 @@ public class PaymentService {
                 try {
                     payments.add(parse(row));
                 } catch (Exception e) {
-                    errorsContener.getMessages().add(new ParseError(e.toString(), row));
+                    errorsContener.getParseErrors().add(new ParseError(e.toString(), row));
                     e.printStackTrace();
                 }
             });

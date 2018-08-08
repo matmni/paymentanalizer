@@ -23,19 +23,19 @@
     <padding>
         <Insets top="100" right="25" bottom="10" left="25"/>
     </padding>
-    <TableView fx:id="importedFileTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="650.0">
+    <TableView fx:id="importedFileTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0">
         <columns>
-            <TableColumn fx:id="id" text="Lp." prefWidth="50.0">
+            <TableColumn fx:id="id" text="Lp." prefWidth="100.0">
                 <cellValueFactory>
                     <PropertyValueFactory property="id"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="fileName" text="Nazwa firmy" prefWidth="400.0">
+            <TableColumn fx:id="fileName" text="Nazwa firmy" prefWidth="500.0">
                 <cellValueFactory>
                     <PropertyValueFactory property="fileName"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="importDate" text="Data wczytania" prefWidth="200.0">
+            <TableColumn fx:id="importDate" text="Data wczytania" prefWidth="300.0">
                 <cellValueFactory>
                     <PropertyValueFactory property="importDate"/>
                 </cellValueFactory>

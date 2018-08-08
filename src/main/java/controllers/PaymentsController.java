@@ -94,7 +94,9 @@ public class PaymentsController implements Initializable {
                     if (currentRow.getItem() != null) {
                         if (currentRow.getItem().getRest().compareTo(BigDecimal.ZERO) == 0) {
                             currentRow.setStyle("-fx-background-color:lightgreen");
-                        } else {
+                        } else if (currentRow.getItem().getRest().compareTo(BigDecimal.ZERO) < 0){
+                            currentRow.setStyle("-fx-background-color:yellow");
+                        }else if (currentRow.getItem().getRest().compareTo(BigDecimal.ZERO) > 0){
                             currentRow.setStyle("-fx-background-color:pink");
                         }
                     }
