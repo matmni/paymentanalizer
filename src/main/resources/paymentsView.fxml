@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import java.net.URL?>
+<VBox fx:id="fileImportedView" fx:controller="controllers.PaymentsController" xmlns:fx="http://javafx.com/fxml">
+    <padding>
+        <Insets top="60" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <GridPane alignment="center" >
+        <Text id="welcome-text" text="Przeglądasz płatności"
+              GridPane.columnIndex="0" GridPane.rowIndex="0"
+              GridPane.columnSpan="2"/>
+        <Separator
+                GridPane.columnIndex="0" GridPane.rowIndex="1"
+                GridPane.columnSpan="2"/>
+    </GridPane>
+    <GridPane alignment="BASELINE_CENTER" prefWidth="240.0">
+        <Label text="Wybierz zakres od:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <DatePicker fx:id="fromDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Wybierz zakres do:" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <DatePicker fx:id="toDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#validateRange"/>
+
+            <HBox spacing="10" alignment="bottom_right"
+                  GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <Button fx:id="refreshListButton" text="Szukaj" disable="true"
+                        onAction="#searchPayments"/>
+            </HBox>
+            <Text fx:id="actiontarget"
+                  GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+    </GridPane>
+
+    <GridPane alignment="center" vgap="10">
+        <padding>
+            <Insets top="20" right="25" bottom="10" left="25"/>
+        </padding>
+        <TableView fx:id="paymentsTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="companyName" text="Nazwa firmy" prefWidth="340.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="companyName"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="description" text="Czynsz" prefWidth="160.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="rentAmount"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="keyWords" text="Słowa kluczowe" prefWidth="240.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="keyWords"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="restOfAmount" text="Należność" prefWidth="160.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="rest"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </GridPane>
+
+    <GridPane alignment="center" vgap="10">
+        <padding>
+            <Insets top="20" right="25" bottom="10" left="25"/>
+        </padding>
+        <TableView fx:id="notMappedPaymentsTable" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="900.0" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="desc" text="Opis" prefWidth="460.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="description"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="amount" text="Opłata" prefWidth="80.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="amount"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="payDate" text="Data wpłaty" prefWidth="140.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="payDate"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="postDate" text="Data księgowania" prefWidth="200.0">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="postDate"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </GridPane>
+
+    <stylesheets>
+        <URL value="@Test.css"/>
+    </stylesheets>
+</VBox>

@@ -11,6 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Company;
+import services.CompanyService;
+import spring.configuration.ApplicationContextSingleton;
 import util.ExceptionBuilder;
 
 import java.math.BigDecimal;
@@ -62,14 +64,11 @@ public class AddCompanyController {
         String kewyWords = getTextFromField(COMPANY_KEY_WORDS_ID, childrens);
         String message = "Pomyślnie dodano firmę";
         try {
-            /**
-             * TODO.
-             * Dodanie do bazy.
-             */
-            Company company = new Company(0L, name, description, new BigDecimal(amount), "TEST, Kupsztal");
-            System.out.println(company.toString());
+            CompanyService service = ApplicationContextSingleton.INSTANCE.getInstance().getBean(CompanyService.class);
+            service.addNewCompany(new Company(name, description, new BigDecimal(amount), kewyWords));
             actiontarget.setFill(Color.GREEN);
         } catch (Exception ex) {
+            ex.printStackTrace();
             actiontarget.setFill(Color.FIREBRICK);
             message = ExceptionBuilder.getExceptionMessage(ex);
         }

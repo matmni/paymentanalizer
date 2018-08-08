@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PaymentsAnalizer.jar" size="54564" download="eager" />
+    <jar href="PaymentsAnalizer.jar" size="98223" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="600" height="400" main-class="sample.Main"  name="PaymentsAnalizer" />
+  <jfx:javafx-desc  width="600" height="400" main-class="controllers.MainController"  name="PaymentsAnalizer" />
   <update check="background"/>
 </jnlp>

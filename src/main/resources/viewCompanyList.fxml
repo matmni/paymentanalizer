@@ -60,6 +60,8 @@
 
         <HBox spacing="10" alignment="bottom_right"
               GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button fx:id="refreshListButton" text="Odśwież"
+                    onAction="#refreshListButton"/>
             <Button fx:id="deleteCompanyButton" text="Usuń" disable="true"
                     onAction="#deleteCompanyButton"/>
 

@@ -11,11 +11,11 @@ import javafx.scene.layout.GridPane;
 import javafx.util.converter.DoubleStringConverter;
 import model.Company;
 import model.CompanyTableData;
+import services.CompanyService;
+import spring.configuration.ApplicationContextSingleton;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,31 +41,20 @@ public class ViewCompanyListController implements Initializable {
 
     @FXML
     TableView<CompanyTableData> companiesTable;
-    List<Company> companies = new ArrayList<>();
 
     @FXML
     GridPane viewMenuId;
 
-
     private ObservableList<CompanyTableData> data = FXCollections
             .observableArrayList();
-
-    public ViewCompanyListController() {
-        companies.add(new Company(1L, "Test1", "Opis", BigDecimal.TEN, "TEST1, Kupa"));
-        companies.add(new Company(2L, "Test2", "Opis Firmy 2", BigDecimal.ONE, "TEST2, kupa"));
-        companies.add(new Company(3L, "Test trzy", "Opis jakiejś tam firmy", BigDecimal.ZERO, "TEST3, KUPA"));
-        companies.add(new Company(4L, "Test 4 cztery testy", "Opis firmy po prostu ostatniej na liście", BigDecimal.valueOf(25L), "TEST4, KUPsztal"));
-    }
 
     private void populateDataIntoTable(List<Company> companies) {
         companies.forEach(c -> data.add(new CompanyTableData(c)));
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        populateDataIntoTable(companies);
-        companiesTable.setItems(data);
+        refreshData();
         companiesTable.setEditable(true);
         name.setCellFactory(
                 TextFieldTableCell.forTableColumn());
@@ -77,23 +66,46 @@ public class ViewCompanyListController implements Initializable {
         amount.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 
         amount.setOnEditCommit(
-                (TableColumn.CellEditEvent<CompanyTableData, Double> t) ->
-                        (t.getTableView().getItems().get(t.getTablePosition().getRow())).setAmount(t.getNewValue())
+                (TableColumn.CellEditEvent<CompanyTableData, Double> t) -> {
+                    (t.getTableView().getItems().get(t.getTablePosition().getRow())).setAmount(t.getNewValue());
+                    getContext().updateCompany(t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                }
+        );
+
+        name.setOnEditCommit(
+                (TableColumn.CellEditEvent<CompanyTableData, String> t) -> {
+                    (t.getTableView().getItems().get(t.getTablePosition().getRow())).setName(t.getNewValue());
+                    getContext().updateCompany(t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                }
         );
 
         description.setOnEditCommit(
-                (TableColumn.CellEditEvent<CompanyTableData, String> t) ->
-                        (t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescription(t.getNewValue())
+                (TableColumn.CellEditEvent<CompanyTableData, String> t) -> {
+                    (t.getTableView().getItems().get(t.getTablePosition().getRow())).setDescription(t.getNewValue());
+                    getContext().updateCompany(t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                }
         );
         keyWords.setOnEditCommit(
-                (TableColumn.CellEditEvent<CompanyTableData, String> t) ->
-                        (t.getTableView().getItems().get(t.getTablePosition().getRow())).setKeyWords(t.getNewValue())
+                (TableColumn.CellEditEvent<CompanyTableData, String> t) -> {
+                    (t.getTableView().getItems().get(t.getTablePosition().getRow())).setKeyWords(t.getNewValue());
+                    getContext().updateCompany(t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                }
         );
         amount.setOnEditCommit(
-                (TableColumn.CellEditEvent<CompanyTableData, Double> t) ->
-                        (t.getTableView().getItems().get(t.getTablePosition().getRow())).setAmount(t.getNewValue())
+                (TableColumn.CellEditEvent<CompanyTableData, Double> t) -> {
+                    (t.getTableView().getItems().get(t.getTablePosition().getRow())).setAmount(t.getNewValue());
+                    getContext().updateCompany(t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                }
         );
     }
+
+    public void refreshData() {
+        data.clear();
+        populateDataIntoTable(getContext().getAllCompanies());
+        companiesTable.setItems(data);
+        companiesTable.refresh();
+    }
+
 
     public void checkSelectedRow() {
         CompanyTableData row = companiesTable.getSelectionModel().getSelectedItem();
@@ -109,8 +121,18 @@ public class ViewCompanyListController implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            companiesTable.getItems().remove(row);
-            companiesTable.refresh();
+            getContext().deteCompany(row);
+            refreshData();
+            deleteCompanyButton.setDisable(true);
         }
     }
+
+    public void refreshListButton(ActionEvent actionEvent) {
+        refreshData();
+    }
+
+    private CompanyService getContext() {
+        return ApplicationContextSingleton.INSTANCE.getInstance().getBean(CompanyService.class);
+    }
+
 }

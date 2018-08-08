@@ -1,12 +1,18 @@
 package model;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class Company {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
+    @Column(name="key_words")
     private String keyWords;
+    @Column(name="rent_amount")
     private BigDecimal amount;
 
     public Company() {
@@ -14,6 +20,12 @@ public class Company {
 
     public Company(Long id, String name, String description, BigDecimal amount, String keyWords) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.amount = amount;
+        this.keyWords = keyWords;
+    }
+    public Company(String name, String description, BigDecimal amount, String keyWords) {
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -59,6 +71,7 @@ public class Company {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
+                ", keyWords=" + keyWords +
                 '}';
     }
 

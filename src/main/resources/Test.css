@@ -63,3 +63,21 @@
 
 .table-row-cell:empty             { -fx-background-color: cornsilk;    }
 .table-row-cell:empty .table-cell { -fx-border-width:     0px;         }
+
+
+.layout {
+  -fx-background-color: cornsilk;
+}
+
+#selected-fruit-frame {
+  -fx-border-color: burlywood;
+  -fx-border-width: 5;
+  -fx-background-color: white;
+}
+
+.bold-label {
+  -fx-font-weight: bold;
+}
+.combo-box .list-cell {
+    -fx-alignment: center;
+}
